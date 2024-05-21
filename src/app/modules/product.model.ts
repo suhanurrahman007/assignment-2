@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
-import { Product } from './product/product.interface';
+import {TProduct } from './product/product.interface';
 
-const productSchema = new Schema<Product>({
+const productSchema = new Schema<TProduct>({
   name: { type: String, required: true },
   description: { type: String, required: true },
   price: { type: Number, required: true },
@@ -15,6 +15,31 @@ const productSchema = new Schema<Product>({
     quantity: { type: Number, required: true },
     inStock: { type: Boolean, required: true },
   },
+  isDeleted: {
+    type: Boolean,
+    default: false
+  }
 });
 
-export const ProductModel = model<Product>('Product', productSchema);
+
+productSchema.pre("find", function(next){
+  this.find({isDeleted: {$ne: true}})
+  next()
+})
+
+productSchema.pre('findOne', function (next) {
+  this.find({ isDeleted: { $ne: true } });
+  next();
+});
+
+productSchema.pre('aggregate', function (next) {
+  this.pipeline().unshift({$match: {isDeleted: {$ne: true}}});
+  next();
+});
+
+// productSchema.statics.isExistsProduct = async function(id: string){
+//   const existingProduct = await ProductModel.findOne({id})
+//   return existingProduct;
+// }
+
+export const ProductModel = model<TProduct>('Product', productSchema);
