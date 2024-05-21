@@ -1,4 +1,3 @@
-import { Model } from "mongoose";
 
 export type TVariant = {
   type: string;
