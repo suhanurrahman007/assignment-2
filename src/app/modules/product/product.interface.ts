@@ -1,4 +1,3 @@
-
 export type TVariant = {
   type: string;
   value: string;
@@ -19,4 +18,3 @@ export type TProduct = {
   inventory: TInventory;
   isDeleted: boolean;
 };
-

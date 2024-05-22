@@ -1,5 +1,5 @@
-import { OrderModel } from "../order.model";
-import { TOrder } from "./order.interface";
+import { OrderModel } from '../order.model';
+import { TOrder } from './order.interface';
 
 const createOrderIntoDB = async (orderData: TOrder) => {
   try {
@@ -16,7 +16,7 @@ const getAllAndSearchOrdersInDB = async (email: string) => {
   try {
     if (email) {
       const result = await OrderModel.find({
-        email
+        email,
       });
       return result;
     } else {
@@ -27,7 +27,6 @@ const getAllAndSearchOrdersInDB = async (email: string) => {
     throw new Error(`Unable to search Orders: ${error}`);
   }
 };
-
 
 export const OrderServices = {
   createOrderIntoDB,

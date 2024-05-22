@@ -2,12 +2,11 @@ import { Request, Response } from 'express';
 import { orderValidationSchema } from './order.validate';
 import { OrderServices } from './order.services';
 
-
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { order: orderData } = req.body;
+    const order = req.body;
 
-    const { error, value } = orderValidationSchema.validate(orderData);
+    const { error, value } = orderValidationSchema.validate(order);
 
     const result = await OrderServices.createOrderIntoDB(value);
 
@@ -39,16 +38,15 @@ const getAllAndEmailOrder = async (req: Request, res: Response) => {
       ? `Orders fetched successfully for user ${email}!`
       : 'Orders fetched successfully!';
 
-      const result = await OrderServices.getAllAndSearchOrdersInDB(
-        email as string,
-      );
+    const result = await OrderServices.getAllAndSearchOrdersInDB(
+      email as string,
+    );
 
-      res.status(200).json({
-          success: true,
-          message,
-          data: result,
-        });
-        
+    res.status(200).json({
+      success: true,
+      message,
+      data: result,
+    });
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -58,8 +56,6 @@ const getAllAndEmailOrder = async (req: Request, res: Response) => {
     });
   }
 };
-
-
 
 export const OrderController = {
   createOrder,

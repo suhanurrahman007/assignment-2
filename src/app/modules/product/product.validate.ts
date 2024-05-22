@@ -1,4 +1,4 @@
-import Joi from "joi";
+import Joi from 'joi';
 
 // Joi schema for validation
 const productValidationSchema = Joi.object({
@@ -45,8 +45,7 @@ const productValidationSchema = Joi.object({
       'boolean.base': 'Inventory stock status must be a boolean',
     }),
   }).required(),
-  isDeleted: Joi.boolean()
+  isDeleted: Joi.boolean(),
 });
-
 
 export default productValidationSchema;

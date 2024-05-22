@@ -1,8 +1,6 @@
 import { Schema, model } from 'mongoose';
-import {TOrder } from './order/order.interface';
+import { TOrder } from './order/order.interface';
 import { ProductModel } from './product.model';
-
-
 
 const orderSchema = new Schema<TOrder>({
   email: { type: String, required: true },
@@ -11,12 +9,9 @@ const orderSchema = new Schema<TOrder>({
   quantity: { type: Number, required: true },
 });
 
-
-
 orderSchema.pre<TOrder>('save', async function (next) {
   try {
     const product = await ProductModel.findById(this.productId);
-    console.log(product);
     if (!product) {
       throw new Error('Product not found');
     }
@@ -32,7 +27,6 @@ orderSchema.pre<TOrder>('save', async function (next) {
     await product.save();
     next();
   } catch (error: any) {
-    
     next(error);
   }
 });
