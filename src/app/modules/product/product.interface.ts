@@ -20,6 +20,3 @@ export type TProduct = {
   isDeleted: boolean;
 };
 
-// export interface ProductModels extends Model<TProduct> {
-//   isExistsProduct(id: string) : Promise<TProduct | null>;
-// }

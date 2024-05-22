@@ -4,4 +4,3 @@ export type TOrder = {
   price: number;
   quantity: number;
 };
-

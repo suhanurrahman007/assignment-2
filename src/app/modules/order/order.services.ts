@@ -1,14 +1,15 @@
 import { OrderModel } from "../order.model";
-import { ProductModel } from "../product.model";
 import { TOrder } from "./order.interface";
 
-const createOrderIntoDB = async (order: TOrder) => {
-
-    const product = await ProductModel.findById(order.productId)
-    console.log(product);
-    
-  const result = await OrderModel.create(order);
-  return result;
+const createOrderIntoDB = async (orderData: TOrder) => {
+  try {
+    // const result = await OrderModel.create(orderData);
+    const order = new OrderModel(orderData);
+    const result = await order.save();
+    return result;
+  } catch (error: any) {
+    throw new Error(error.message);
+  }
 };
 
 const getAllAndSearchOrdersInDB = async (email: string) => {

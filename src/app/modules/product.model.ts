@@ -1,6 +1,5 @@
 import { Schema, model } from 'mongoose';
 import {TProduct } from './product/product.interface';
-
 const productSchema = new Schema<TProduct>({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -37,9 +36,6 @@ productSchema.pre('aggregate', function (next) {
   next();
 });
 
-// productSchema.statics.isExistsProduct = async function(id: string){
-//   const existingProduct = await ProductModel.findOne({id})
-//   return existingProduct;
-// }
+
 
 export const ProductModel = model<TProduct>('Product', productSchema);

@@ -14,8 +14,7 @@ const createOrder = async (req: Request, res: Response) => {
     if (error) {
       res.status(500).json({
         success: false,
-        message: 'something went wrong!',
-        error: error.details,
+        message: error.message,
       });
     }
 
@@ -24,11 +23,10 @@ const createOrder = async (req: Request, res: Response) => {
       message: 'Order created successfully!',
       data: result,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: 'An error occurred while retrieving Orders',
-      error: error,
+      message: error.message,
       data: null,
     });
   }
