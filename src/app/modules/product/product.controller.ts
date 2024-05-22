@@ -4,9 +4,9 @@ import productValidationSchema from "./product.validate";
 
 const createProduct = async(req: Request, res: Response)=>{
     try {
-        const {product: productData} = req.body;
+        const product = req.body;
 
-        const {error, value} = productValidationSchema.validate(productData)
+        const {error, value} = productValidationSchema.validate(product)
 
         const result = await ProductServices.createProductIntoDB(value)
 
@@ -111,9 +111,9 @@ const getDeleteProduct = async (req: Request, res: Response) => {
 
     if (result) {
       return res.status(404).json({
-        success: false,
+        success: true,
         message: 'Product deleted successfully!',
-        data: null,
+        data: result,
       });
     }
   } catch (error) {

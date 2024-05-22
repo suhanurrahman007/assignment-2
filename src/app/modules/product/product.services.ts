@@ -2,7 +2,6 @@ import { ProductModel } from '../product.model';
 import { TProduct } from './product.interface';
 
 const createProductIntoDB = async (product: TProduct) => {
-
  
   const result = await ProductModel.create(product);
   return result;
@@ -31,9 +30,8 @@ const getAllAndSearchProductsInDB = async (searchTerm: string) => {
 };
 
 const getSingleProductIntoDB = async (_id: string) => {
-  // const result = await ProductModel.findOne({ _id });
-const result = await ProductModel.aggregate([{$match: {_id: _id}}])
-
+  const result = await ProductModel.findOne({ _id });
+// const result = await ProductModel.aggregate([{$match: {_id: _id}}])
   return result;
 };
 
