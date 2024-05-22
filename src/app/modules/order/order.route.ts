@@ -5,6 +5,6 @@ import { OrderController } from './order.controller';
 const router = express.Router();
 
 router.post('/', OrderController.createOrder);
-router.get('/', OrderController.getAllAndSearchOrder);
+router.get('/', OrderController.getAllAndEmailOrder);
 
 export const OrderRoutes = router;
